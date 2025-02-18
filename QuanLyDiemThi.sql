@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 -- MySQL dump 10.13  Distrib 9.2.0, for macos15.2 (arm64)
 --
 -- Host: localhost    Database: QuanLyDiemThi
@@ -130,3 +131,48 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2025-02-18 11:43:16
+=======
+-- create database  QuanLyDiemThi ;
+
+use QuanLyDiemThi;
+
+create table if not exists HocSinh (
+MaHS varchar(20) not null unique,
+TenHS varchar(50) not null,
+NgaySinh DateTime,
+Lop varchar(20),
+GT varchar(20),
+primary key (MaHS)
+);
+
+create table if not exists MonHoc(
+MaMH varchar(20),
+TenMH varchar(50),
+MaGV varchar(20),
+primary key (MaMH)
+);
+
+create table if not exists BangDiem(
+MaHS varchar(20),
+MaMH varchar(50),
+DiemThi int,
+NgayKT DateTime,
+primary key (MaHS, MaMH),
+constraint fk_HocSinh foreign key (MaHS) references HocSinh(MaHS),
+constraint fk_BangDiem foreign key (MaMH) references MonHoc(MaMH)
+);
+
+create table if not exists GiaoVien(
+MaGV varchar(20),
+TenGV varchar(50),
+Sdt varchar(10),
+primary key (MaGV)
+);
+
+alter table MonHoc add constraint fk_MonHoc_GiaoVien foreign key (MaGV) references GiaoVien(MaGV);
+
+SHOW TABLES LIKE 'BangDiem';
+
+
+
+
